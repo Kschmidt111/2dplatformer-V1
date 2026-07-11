@@ -10,7 +10,10 @@ find_package(SDL2 CONFIG REQUIRED)
 add_executable(2dplatformer
     src/main.cpp
     src/Game.cpp
+    src/Input.cpp
+    src/Player.cpp
 )
 
 target_include_directories(2dplatformer PRIVATE src)
 target_link_libraries(2dplatformer PRIVATE SDL2::SDL2)
+target_compile_definitions(2dplatformer PRIVATE SDL_MAIN_HANDLED)

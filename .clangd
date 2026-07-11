@@ -1,6 +1,0 @@
-CompileFlags:
-  Add:
-    - -std=c++17
-    - -IC:/Users/schm3/OneDrive/Desktop/2dplatformer/src
-    - -IC:/vcpkg/installed/x64-windows/include
-    - -IC:/vcpkg/installed/x64-windows/include/SDL2

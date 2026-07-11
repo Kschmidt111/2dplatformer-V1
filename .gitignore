@@ -54,6 +54,7 @@ ipch/
 
 # IntelliSense / language server cache
 .cache/
+.clangd
 .clangd/
 compile_commands.json
 
@@ -67,3 +68,6 @@ Desktop.ini
 *.tmp
 *.swp
 *~
+
+
+rules.MD

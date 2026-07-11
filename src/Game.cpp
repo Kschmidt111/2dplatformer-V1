@@ -1,4 +1,6 @@
 #include "Game.h"
+#include "Camera.h"
+#include "Player.h"
 #include <SDL.h>
 
 bool Game::init()
@@ -17,37 +19,33 @@ bool Game::init()
     return true;
 }
 
-void Game::run(){
+void Game::run()
+{
     Uint32 lastTime = SDL_GetTicks();
-    while (running){
-        SDL_Event event;
-     
-        while (SDL_PollEvent(&event)){
-            if(event.type == SDL_QUIT){
-                      
-                running = false;
-            }
-            if(event.type == SDL_KEYDOWN){
-                if(event.key.keysym.sym == SDLK_ESCAPE){
-                    running = false;
-                }
-            }
-                     
-        }
-        SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
-        //every frame we clear the renderer
-        SDL_RenderClear(renderer);
-        //every frame we render the scene
-        SDL_RenderPresent(renderer);
+    Player player;
+    Camera camera;
+
+    while (running)
+    {
+        input.update();
+        if (input.shouldQuit())
+            running = false;
+
         Uint32 currentTime = SDL_GetTicks();
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
-        
+
+        player.update(deltaTime, input);
+
+        SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
+        SDL_RenderClear(renderer);
+        player.draw(renderer, camera);
+        SDL_RenderPresent(renderer);
     }
 }
 
-
-void Game::clean(){
+void Game::clean()
+{
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(window);
     SDL_Quit();
