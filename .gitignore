@@ -1,0 +1,69 @@
+# Build output
+build/
+out/
+cmake-build-*/
+Debug/
+Release/
+x64/
+x86/
+bin/
+lib/
+
+# Compiled objects & binaries
+*.o
+*.obj
+*.lo
+*.a
+*.lib
+*.so
+*.dylib
+*.dll
+*.exe
+*.out
+*.app
+*.i*86
+*.pdb
+*.ilk
+*.exp
+
+# CMake
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+Makefile
+install_manifest.txt
+CTestTestfile.cmake
+Testing/
+
+# Visual Studio
+.vs/
+*.vcxproj.user
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.VC.opendb
+ipch/
+
+# Visual Studio Code / Cursor (local editor state)
+.vscode/.browse.VC.db
+.vscode/ipch/
+
+# IntelliSense / language server cache
+.cache/
+.clangd/
+compile_commands.json
+
+# OS
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs & temp
+*.log
+*.tmp
+*.swp
+*~
