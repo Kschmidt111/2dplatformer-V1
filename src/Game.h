@@ -1,9 +1,9 @@
 #pragma once
 
 struct SDL_Window;
+struct SDL_Renderer;
 
-class Game
-{
+class Game{
     public:
         bool init();
         void run();
@@ -12,4 +12,6 @@ class Game
 
     private:
         SDL_Window* window = nullptr;
+        SDL_Renderer* renderer = nullptr;
+        bool running = false;
 };
