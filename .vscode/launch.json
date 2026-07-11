@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug 2dplatformer",
+            "type": "lldb",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/Debug/2dplatformer.exe",
+            "args": [],
+            "cwd": "${workspaceFolder}/build/Debug",
+            "preLaunchTask": "CMake: build Debug"
+        }
+    ]
+}

@@ -18,4 +18,6 @@ private:
     float width{32};
     float height{32};
     float speed{200};
+    float vy{0};
+    bool onGround{false};
 };

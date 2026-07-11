@@ -1,7 +1,12 @@
 #include "Input.h"
+#include "SDL_keyboard.h"
+#include "SDL_keycode.h"
 
 void Input::update()
 {
+    for (int i = 0; i < SDL_NUM_SCANCODES; ++i){
+        pressed[i] = false;
+    }
     SDL_Event event;
 
     while (SDL_PollEvent(&event))
@@ -9,16 +14,18 @@ void Input::update()
         if (event.type == SDL_KEYDOWN)
         {
             keys[event.key.keysym.scancode] = true;
+            pressed[event.key.keysym.scancode] = true;
 
             if (event.key.keysym.sym == SDLK_ESCAPE)
                 quit = true;
         }
 
-        if (event.type == SDL_KEYUP)
+        if (event.type == SDL_KEYUP){
             keys[event.key.keysym.scancode] = false;
-
-        if (event.type == SDL_QUIT)
+        }
+        if (event.type == SDL_QUIT){
             quit = true;
+        }
 
         // -------- DEBUG INPUT (comment out this block) --------
         // if (event.type == SDL_KEYDOWN)
@@ -36,4 +43,9 @@ bool Input::isKeyDown(SDL_Keycode key) const
 bool Input::shouldQuit() const
 {
     return quit;
+}
+
+bool Input::isKeyPressed(SDL_Keycode key) const
+{
+    return pressed[SDL_GetScancodeFromKey(key)];
 }
