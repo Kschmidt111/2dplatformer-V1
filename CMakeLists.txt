@@ -12,6 +12,7 @@ add_executable(2dplatformer
     src/Game.cpp
     src/Input.cpp
     src/Player.cpp
+    src/Level.cpp
 )
 
 target_include_directories(2dplatformer PRIVATE src)

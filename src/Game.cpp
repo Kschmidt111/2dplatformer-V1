@@ -1,5 +1,6 @@
 #include "Game.h"
 #include "Camera.h"
+#include "Level.h"
 #include "Player.h"
 #include <SDL.h>
 
@@ -23,6 +24,7 @@ void Game::run()
 {
     Uint32 lastTime = SDL_GetTicks();
     Player player;
+    Level level;
     Camera camera;
 
     while (running)
@@ -35,10 +37,11 @@ void Game::run()
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
 
-        player.update(deltaTime, input);
+        player.update(deltaTime, input, level.platforms());
 
         SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
         SDL_RenderClear(renderer);
+        level.draw(renderer, camera);
         player.draw(renderer, camera);
         SDL_RenderPresent(renderer);
     }

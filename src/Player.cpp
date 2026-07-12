@@ -4,11 +4,14 @@
 #include "SDL_keycode.h"
 #include "SDL_render.h"
 #include <SDL.h>
+#include <cstddef>
+#include <vector>
+#include "Level.h"
 
 const float gravity{800};
-const float groundY{600};
-const float jumpForce{-400};
-void Player::update(float deltaTime, const Input& input)
+const float groundY{500};
+const float jumpForce{-500};
+void Player::update(float deltaTime, const Input& input, const std::vector<Platform>& platforms)
 {
     if (input.isKeyDown(SDLK_LEFT) || input.isKeyDown(SDLK_a)){
         x -= speed * deltaTime;
@@ -16,9 +19,19 @@ void Player::update(float deltaTime, const Input& input)
     if (input.isKeyDown(SDLK_RIGHT) || input.isKeyDown(SDLK_d)){
         x += speed * deltaTime;
     }
+
+    for (const Platform& platform : platforms){
+        overlap(platform);
+    }
+
     if (input.isKeyPressed(SDLK_SPACE) && onGround){
         vy = jumpForce;
     }
+
+
+
+
+
     vy += gravity * deltaTime; 
     y += vy * deltaTime;
     int feet = y + height;
@@ -30,7 +43,12 @@ void Player::update(float deltaTime, const Input& input)
     else{
         onGround = false;
     }
+
+    
 }
+
+
+
 
 void Player::draw(SDL_Renderer* renderer, const Camera& camera) const
 {
@@ -42,5 +60,28 @@ void Player::draw(SDL_Renderer* renderer, const Camera& camera) const
     rect.h = static_cast<int>(height);
     SDL_SetRenderDrawColor(renderer,  255,  100,  100,  255);
     SDL_RenderFillRect(renderer, &rect);
+
+}
+
+void Player::overlap(Platform platform) 
+{
+
+        if (x < platform.x + platform.width &&
+            x + width > platform.x &&
+            y < platform.y + platform.height &&
+            y + height > platform.y){
+
+                float playerCenter{(x + width)/2};
+                float platformCenter{(platform.x + platform.width)/2};
+                if(playerCenter < platformCenter){
+                    x = platform.x - width;
+                }
+                else{
+                    x = platform.x + platform.width;
+                }
+
+            }
+            
+    
 
 }
