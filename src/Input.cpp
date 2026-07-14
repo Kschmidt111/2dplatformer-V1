@@ -14,7 +14,9 @@ void Input::update()
         if (event.type == SDL_KEYDOWN)
         {
             keys[event.key.keysym.scancode] = true;
-            pressed[event.key.keysym.scancode] = true;
+            // Ignore OS key-repeat — only the real press counts for isKeyPressed
+            if (!event.key.repeat)
+                pressed[event.key.keysym.scancode] = true;
 
             if (event.key.keysym.sym == SDLK_ESCAPE)
                 quit = true;

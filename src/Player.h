@@ -1,5 +1,5 @@
 #pragma once
-#include <string.h>
+
 #include "Input.h"
 #include "Level.h"
 #include <vector>
@@ -13,9 +13,18 @@ class Player
 public:
     void update(float deltaTime, const Input& input, const std::vector<Platform>& platforms);
     void draw(SDL_Renderer* renderer, const Camera& camera) const;
-    void overlap(Platform platforms);
-    bool leftHit(const Platform* platform);
+
 private:
+    void applyHorizontalInput(float deltaTime, const Input& input);
+    void applyJump(float deltaTime, const Input& input);
+    void resolveHorizontal(const std::vector<Platform>& platforms);
+    void applyGravity(float deltaTime);
+    void resolveVertical(const std::vector<Platform>& platforms);
+
+    void overlapX(const Platform& platform);
+    void overlapY(const Platform& platform);
+    bool overlaps(const Platform& platform) const;
+
     float x{100};
     float y{400};
     float width{32};
@@ -23,4 +32,5 @@ private:
     float speed{200};
     float vy{0};
     bool onGround{false};
+    float jumpBuffer{0};
 };
