@@ -3,6 +3,7 @@
 #include "Level.h"
 #include "Player.h"
 #include <SDL.h>
+#include <algorithm>
 
 bool Game::init()
 {
@@ -38,7 +39,7 @@ void Game::run()
         lastTime = currentTime;
 
         player.update(deltaTime, input, level.platforms());
-
+        camera.x = std::clamp(player.x - 400.0f, 0.0f, 1600.0f);
         SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
         SDL_RenderClear(renderer);
         level.draw(renderer, camera);

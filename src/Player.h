@@ -13,6 +13,8 @@ class Player
 public:
     void update(float deltaTime, const Input& input, const std::vector<Platform>& platforms);
     void draw(SDL_Renderer* renderer, const Camera& camera) const;
+    float x{100};
+    float y{400};
 
 private:
     void applyHorizontalInput(float deltaTime, const Input& input);
@@ -25,8 +27,7 @@ private:
     void overlapY(const Platform& platform);
     bool overlaps(const Platform& platform) const;
 
-    float x{100};
-    float y{400};
+    int jumpsLeft{2};
     float width{32};
     float height{32};
     float speed{200};

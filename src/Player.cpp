@@ -36,11 +36,12 @@ void Player::applyJump(float deltaTime, const Input& input)
     if (jumpBuffer > 0.0f)
         jumpBuffer -= deltaTime;
 
-    if (jumpBuffer > 0.0f && onGround)
+    if (jumpBuffer > 0.0f && jumpsLeft > 0)
     {
         vy = jumpForce;
         onGround = false;
         jumpBuffer = 0.0f;
+        jumpsLeft -= 1;
     }
 }
 
@@ -92,6 +93,7 @@ void Player::overlapY(const Platform& platform)
         y = platform.y - height;
         vy = 0;
         onGround = true;
+        jumpsLeft = 2;
     }
     else
     {
