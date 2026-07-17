@@ -37,9 +37,9 @@ void Game::run()
         Uint32 currentTime = SDL_GetTicks();
         float deltaTime = (currentTime - lastTime) / 1000.0f;
         lastTime = currentTime;
-
+        deltaTime = std::clamp(deltaTime, 0.0f, 0.05f); 
         player.update(deltaTime, input, level.platforms());
-        camera.x = std::clamp(player.x - 400.0f, 0.0f, 1600.0f);
+        camera.x = std::clamp(player.x - 400.0f, 0.0f, 35600.0f);
         SDL_SetRenderDrawColor(renderer, 30, 30, 40, 255);
         SDL_RenderClear(renderer);
         level.draw(renderer, camera);
