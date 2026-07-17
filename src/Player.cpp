@@ -83,11 +83,18 @@ bool Player::overlaps(const Platform& platform) const
            y + height > platform.y;
 }
 
+void Player::respawn(){
+    x = 100;
+    y = 400;
+}
+
 void Player::overlapY(const Platform& platform)
 {
     if (!overlaps(platform))
         return;
-
+    if(platform.field == Lava){
+        respawn();
+    }
     if (vy >= 0)
     {
         y = platform.y - height;

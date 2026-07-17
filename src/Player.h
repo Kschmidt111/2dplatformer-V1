@@ -26,6 +26,7 @@ private:
     void overlapX(const Platform& platform);
     void overlapY(const Platform& platform);
     bool overlaps(const Platform& platform) const;
+    void respawn();
 
     int jumpsLeft{2};
     float width{32};
